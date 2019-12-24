@@ -9,11 +9,9 @@ class ModelTests (TestCase):
         """Test if user with given email was created"""
         email = 'test@test.com'
         password = 'Pass123'
-        name = 'Micahel'
 
         user = get_user_model().objects.create_user(
             email=email,
-            name=name,
             password=password
         )
 
@@ -23,12 +21,10 @@ class ModelTests (TestCase):
     def test_user_email_is_normalized(self):
         """Tests if email is normalized"""
         email = 'test@TEST.COM'
-        name = 'Test User'
         password = 'TestPassword123'
 
         user = get_user_model().objects.create_user(
             email=email,
-            name=name,
             password=password
         )
 
@@ -39,15 +35,13 @@ class ModelTests (TestCase):
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(
                 None,
-                password='Pass123',
-                name='Michael'
+                password='Pass123'
             )
 
     def test_create_superuser_with_email_succesful(self):
         """Tests whether super user was created"""
         user = get_user_model().objects.create_superuser(
             email='test@test.com',
-            name='Michael',
             password='Test123'
         )
 
